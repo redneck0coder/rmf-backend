@@ -37,7 +37,7 @@ class ArticleController extends Controller
      */
     public function store(Store $request)
     {
-			$data = $request->validated();
+				$data = $request->validated();
 				Article::create($data);
 				return redirect()->route('articles.index');
     }

@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RMF</title>
 	@vite('resources/css/app.css')
+	@vite('resources/js/ckeditor')
 </head>
 <body>
 	<x-ui.header :topics="$topics"></x-ui.header>
