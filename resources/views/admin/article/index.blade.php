@@ -1,28 +1,31 @@
 <x-layout.admin :topics="$topics">
-	<section class="p-4">
-		<h2 class="text-2xl">Статьи сайта: </h2>
-		<a class="text-blue-400" href="{{ route('articles.create') }}">Добавить статью</a>
-		<table class="table-auto">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>alias</th>
-					<th>topic_id</th>
-					<th>Наименование</th>
-					<th>Описание</th>
-					<th>Дейсвтия</th>
+	<section class="p-4 main-container bg-white">
+		<h2 class="text-2xl my-4">Статьи сайта: </h2>
+		<div class="my-4">
+			<a  href="{{ route('articles.create') }}">Добавить статью</a>
+		</div>
+		<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+		<table class="table-auto w-full text-sm text-left border">
+			<thead class="text-xs text-gray-700 uppercase bg-gray-50">
+				<tr class="text-center">
+					<th class="px-6 py-3">id</th>
+					<th class="px-6 py-3">alias</th>
+					<th class="px-6 py-3">topic_id</th>
+					<th class="px-6 py-3">Наименование</th>
+					<th class="px-6 py-3">Описание</th>
+					<th class="px-6 py-3">Дейсвтия</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($articles as $article)
-				<tr>
-					<td>{{ $article->id }}</td>
-					<td>{{ $article->alias }}</td>
-					<td>{{ $article->topic_id }}</td>
-					<td>{{ $article->title }}</td>
-					<td>{{ $article->body }}</td>
+				<tr class="odd:bg-white  even:bg-gray-50 text-center">
+					<td class="px-6 py-4">{{ $article->id }}</td>
+					<td class="px-6 py-4">{{ $article->alias }}</td>
+					<td class="px-6 py-4">{{ $article->topic_id }}</td>
+					<td class="px-6 py-4">{{ $article->title }}</td>
+					<td class="px-6 py-4">{{ $article->body }}</td>
 					<td>
-						<div class="flex">
+						<div class="flex justify-center">
 							<a href="{{ route('articles.edit', $article->id) }}">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 									<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
@@ -44,5 +47,6 @@
 
 			</tbody>
 		</table>
+	</div>
 	</section>
 </x-layout.public>

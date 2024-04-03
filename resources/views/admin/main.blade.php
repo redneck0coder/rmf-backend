@@ -1,17 +1,17 @@
 <x-layout.admin :topics="$topics">
-	<section class="p-4">
-		<div class="flex flex-col">
-			<a href="{{ route('topics.index') }}">
-				<div class="w-full border rounded p-4 my-4">	
+	<section class="p-4 main-container text-white bg-white">
+		<div class="flex justify-center text-black">
+				<div class="border rounded m-4 flex items-center p-12">	
+					<a href="{{ route('topics.index') }}">
 						Управление разделами
+					</a>
 				</div>
-			</a>
 
-			<a href="{{ route('articles.index') }}">
-				<div class="w-full border rounded p-4 my-4">	
-						Управление статьями
+				<div class="border rounded m-4 flex items-center p-12">	
+					<a href="{{ route('articles.index') }}">
+							Управление статьями
+					</a>
 				</div>
-			</a>
 		</div>
 	</section>
 </x-layout.public>

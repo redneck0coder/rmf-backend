@@ -35,7 +35,6 @@ class TopicController extends Controller
     public function store(Store $request)
     {
 
-
 			$topic = Topic::make($request->validated());
 			$topic->save();
 			
@@ -50,7 +49,6 @@ class TopicController extends Controller
 					$topic->image()->save($image);
 			}
 
-			
 			return redirect()->route('topics.index');
     }
 

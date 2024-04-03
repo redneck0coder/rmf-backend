@@ -1,52 +1,57 @@
 <x-layout.admin :topics="$topics">
-	<section class="p-4">
-		<h2 class="text-2xl">Разделы сайта: </h2>
-		<a class="text-blue-400" href="{{ route('topics.create') }}">Добавить раздел</a>
-		<table class="table-auto">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>image</th>
-					<th>Картинка</th>
-					<th>Наименование</th>
-					<th>Описание</th>
-					<th>Дейсвтия</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($topics as $topic)
-				<tr>
-					<td>{{ $topic->id }}</td>
-					<td>
-						@if($topic->image)
-							<img width="50" src="/images/{{ $topic->image->url}}" alt="">
-						@endif
-					</td>
-					<td>{{ $topic->alias }}</td>
-					<td>{{ $topic->name }}</td>
-					<td>{{ $topic->desc }}</td>
-					<td>
-						<div class="flex">
-							<a href="{{ route('topics.edit', $topic->id) }}">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-								</svg>
-							</a>
-
-							<x-form :action="route('topics.destroy', $topic->id)" method="post">
-								@method('DELETE')
-								<button type="submit">
+	<section class="p-4 main-container bg-white">
+		<h2 class="text-2xl my-2">Разделы сайта: </h2>
+		<div class="my-2">
+			<a href="{{ route('topics.create') }}">Добавить раздел</a>
+		</div>
+		<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+			<table class="table-auto w-full text-sm text-left border">
+				<thead class="text-xs text-gray-700 uppercase bg-gray-50">
+					<tr class="text-center">
+						<th class="px-6 py-3">id</th>
+						<th class="px-6 py-3">Картинка</th>
+						<th class="px-6 py-3">Алиас</th>
+						<th class="px-6 py-3">Наименование</th>
+						<th class="px-6 py-3">Описание</th>
+						<th class="px-6 py-3">Дейсвтия</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($topics as $topic)
+					<tr class="odd:bg-white  even:bg-gray-50 text-center">
+						<td class="px-6 py-4">{{ $topic->id }}</td>
+						<td class="px-6 py-4 flex justify-center">
+							@if($topic->image)
+								<img width="50" src="/images/{{ $topic->image->url}}" alt="">
+							@endif
+						</td>
+						<td class="px-6 py-4">{{ $topic->alias }}</td>
+						<td class="px-6 py-4">{{ $topic->name }}</td>
+						<td class="px-6 py-4 max-w-48">{{ $topic->desc }}</td>
+						<td class="px-6 py-4">
+							<div class="flex justify-center">
+								<a class="mx-2" href="{{ route('topics.edit', $topic->id) }}">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-										<path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+										<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
 									</svg>
-								</button>
-							</x-form>
-						</div>
-					</td>
-				</tr>
-				@endforeach
+								</a>
 
-			</tbody>
-		</table>
+								<x-form  class="mx-2" :action="route('topics.destroy', $topic->id)" method="post">
+									@method('DELETE')
+									<button type="submit">
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+											<path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+										</svg>
+									</button>
+								</x-form>
+							</div>
+						</td>
+					</tr>
+					@endforeach
+
+				</tbody>
+			</table>
+		</div>
+
 	</section>
 </x-layout.public>

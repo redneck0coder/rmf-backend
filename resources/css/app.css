@@ -5,3 +5,8 @@
 .navbar {
 	height: calc(100vh - 96px);
 }
+
+.main-container {
+	width: 100%;
+	height: calc(100vh - 96px);
+}

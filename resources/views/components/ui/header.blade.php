@@ -1,7 +1,7 @@
-<header class="h-24 p-8 border-b flex justify-between items-center">
-	<div class="flex items-center"> 
+<header class="h-24 p-8 text-white ">
+	<div class="flex justify-between items-center "> 
 		<div class="text-2xl mx-8">
-			<a href="{{route('main')}}">RoadMapFrontend 2024</a>	
+			<a href="{{route('main')}}">RoadMapFrontend</a>	
 		</div>
 		<nav>
 			<ul class="flex">
@@ -15,15 +15,17 @@
 						<a href="{{ route('topic.main', $topic->alias) }}">{{ $topic->name }}</a>
 					</li>
 					@endforeach
+					@auth
+					<li class="ml-4">
+						<x-form :action="route('login.logout')">
+								<button class="text-rose-500" type="submit">Выход</button>
+						</x-form>
+					</li>
+					@endif
 			</ul>
 		</nav>
 	</div>
 	<div>
-		@auth
-		<x-form :action="route('login.logout')">
-			<button class="text-rose-400" type="submit">Выход</button>
-		</x-form>
-		@endif
 	</div>
 
 </header>

@@ -1,5 +1,6 @@
 <x-layout.admin :topics="$topics">
-	<section class="flex justify-center items-center">
+	<section class="flex flex-col justify-center items-center">
+		<h2 class="text-4xl text-white">Редактирование темы</h2>
 		<x-form :action="route('topics.update', $topic->id)" method="put" enctype="multipart/form-data" >
 				@bind($topic)
 					@include('admin.topic.form')

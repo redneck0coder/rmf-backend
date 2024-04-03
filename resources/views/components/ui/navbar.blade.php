@@ -1,5 +1,5 @@
 
-<nav class="navbar w-48 border-r">
+<nav class="navbar w-64 bg-white border-r text-black">
 		<ul class="flex flex-col">
 			@auth
 				<li class="border-b py-4 text-center">

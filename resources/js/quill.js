@@ -18,7 +18,6 @@ const toolbarOptions = [
 
 const quill = new Quill('#editor', {
   modules: {
-	syntax: true, 
 	toolbar: toolbarOptions
   },
   theme: 'snow'

@@ -8,7 +8,9 @@
 	@vite('resources/css/app.css')
 </head>
 <body>
-	<x-ui.header :topics="$topics"></x-ui.header>
-	{{ $slot }}
+	<div class="bg-gradient-to-bl from-emerald-400 from-0% to-cyan-400 to-100%">
+		<x-ui.header :topics="$topics"></x-ui.header>
+		{{ $slot }}
+	</div>
 </body>
 </html>
