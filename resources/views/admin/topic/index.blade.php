@@ -6,6 +6,7 @@
 			<thead>
 				<tr>
 					<th>id</th>
+					<th>image</th>
 					<th>Картинка</th>
 					<th>Наименование</th>
 					<th>Описание</th>
@@ -16,6 +17,11 @@
 				@foreach($topics as $topic)
 				<tr>
 					<td>{{ $topic->id }}</td>
+					<td>
+						@if($topic->image)
+							<img width="50" src="/images/{{ $topic->image->url}}" alt="">
+						@endif
+					</td>
 					<td>{{ $topic->alias }}</td>
 					<td>{{ $topic->name }}</td>
 					<td>{{ $topic->desc }}</td>

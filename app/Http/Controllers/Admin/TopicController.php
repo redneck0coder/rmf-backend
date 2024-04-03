@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Topic\Store;
 use App\Http\Requests\Topic\Update;
 use App\Models\Topic;
+use App\Models\Image;
 
 class TopicController extends Controller
 {
@@ -14,7 +15,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-				$topics = Topic::all();
+				$topics = Topic::with('image')->get();
         return view('admin.topic.index', compact('topics'));
     }
 
@@ -33,7 +34,23 @@ class TopicController extends Controller
      */
     public function store(Store $request)
     {
-			Topic::create($request->validated());
+
+
+			$topic = Topic::make($request->validated());
+			$topic->save();
+			
+			if($request->hasFile('url')) {
+					$imageName = time().'.'.$request->url->getClientOriginalExtension();
+					$request->url->move(public_path('images'), $imageName); 
+					
+					$image = new Image;
+					$image->url = $imageName;
+					$image->imagetable_id = $topic->id;
+
+					$topic->image()->save($image);
+			}
+
+			
 			return redirect()->route('topics.index');
     }
 

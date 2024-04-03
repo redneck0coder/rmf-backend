@@ -9,7 +9,7 @@ class Image extends Model
 {
     use HasFactory;
 
-		public $fillable = ['url'];
+		public $fillable = ['url', 'imagetable_type', 'imagetable_id'];
 
 		public function imagetable(): MorphTo
     {

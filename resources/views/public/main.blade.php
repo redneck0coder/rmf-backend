@@ -21,7 +21,8 @@
 
 		@foreach($topics as $topic)
 			<a href="{{ route('topic.main', $topic->alias) }}">
-				<div class="w-36 h-36 border rounded-xl p-4 flex justify-center items-center m-4">
+				<div class="w-36 h-36 border rounded-xl p-4 flex flex-col justify-center items-center m-4">
+					<img class="my-4" width="50" src="/images/{{$topic->image->url}}" alt="logo">
 					{{ $topic->name }}
 				</div>
 			</a>
