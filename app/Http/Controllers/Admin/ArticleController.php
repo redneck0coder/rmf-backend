@@ -7,6 +7,7 @@ use App\Http\Requests\Article\Store;
 use App\Http\Requests\Article\Update;
 use App\Models\Article;
 use App\Models\Topic;
+use App\Models\Image;
 
 use Illuminate\Http\Request;
 
@@ -38,7 +39,21 @@ class ArticleController extends Controller
     public function store(Store $request)
     {
 				$data = $request->validated();
-				Article::create($data);
+				$article = Article::make($data);
+
+				$article->save();
+
+				if($request->hasFile('url')) {
+					$imageName = time().'.'.$request->url->getClientOriginalExtension();
+					$request->url->move(public_path('images'), $imageName); 
+					
+					$image = new Image;
+					$image->url = $imageName;
+					$image->imagetable_id = $article->id;
+					
+					$article->image()->save($image);
+				}
+
 				return redirect()->route('articles.index');
     }
 

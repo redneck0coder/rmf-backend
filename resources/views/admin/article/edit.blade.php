@@ -1,6 +1,6 @@
 <x-layout.admin :topics="$topics">
 	<section class="flex justify-center items-start main-container">
-		<x-form action="{{ route('articles.update', $article->id) }}" method="post">
+		<x-form action="{{ route('articles.update', $article->id) }}" method="post" enctype="multipart/form-data" >
 		<h2 class="text-2xl text-white">Редактирование статьи</h2>
 			@method('PUT')
 			@bind($article)

@@ -46,9 +46,9 @@ class TopicController extends Controller
 					$image->url = $imageName;
 					$image->imagetable_id = $topic->id;
 
-					$topic->image()->save($image);
 			}
 
+			$topic->image()->save($image);
 			return redirect()->route('topics.index');
     }
 

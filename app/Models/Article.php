@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Topic;
 
 class Article extends Model
 {
@@ -15,5 +16,9 @@ class Article extends Model
     {
         return $this->morphOne(Image::class, 'imagetable');
     }
+
+		public function topic() {
+			return $this->belongsTo(Topic::Class);
+		}
 
 }
