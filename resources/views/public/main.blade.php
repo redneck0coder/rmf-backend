@@ -1,6 +1,6 @@
 <x-layout.public :topics="$topics">
 <section class="main-container flex text-white">
-	<div class="h-full w-1/2  flex flex-col justify-center items-center ">
+	<div class="h-full w-1/2 flex flex-col justify-center items-center ">
 		<h1 class="text-4xl">
 			Road Map Frontend
 		</h1>

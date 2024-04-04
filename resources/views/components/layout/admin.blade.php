@@ -10,7 +10,25 @@
 <body>
 	<div class="bg-gradient-to-bl from-emerald-400 from-0% to-cyan-400 to-100%">
 		<x-ui.header :topics="$topics"></x-ui.header>
-		{{ $slot }}
+		<div class="flex">
+			<nav class="navbar py-4 px-2">
+				<div class="w-64 h-full bg-white rounded-xl">
+						<ul class="flex flex-col">
+								<li class="border-b py-4 text-center">
+									<a href="{{ route('admin.main') }}">Управление</a>
+								</li>			
+								<li class="border-b py-4 text-center">
+									<a href="{{ route('topics.index') }}">Управление разделами</a>
+								</li>			
+								<li class="border-b py-4 text-center">
+									<a href="{{ route('articles.index') }}">Управление статьями</a>
+								</li>
+						</ul>
+				</div>
+			</nav>
+			{{ $slot }}
+		</div>
+
 	</div>
 </body>
 </html>

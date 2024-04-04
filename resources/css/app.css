@@ -9,4 +9,28 @@
 .main-container {
 	width: 100%;
 	height: calc(100vh - 96px);
+	max-height: calc(100vh - 96px);
+}
+
+
+/* Scrollbar style */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	-webkit-border-radius: 0.75rem;
+	border-radius: 0.75rem;
+	margin: 10px 0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 0.75rem;
+	background: #34d399; 
+	border: 1px solid white;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #34d399; 
 }
