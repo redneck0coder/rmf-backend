@@ -25,7 +25,6 @@
 						@if($article->image)
 							<img width="50" src="/images/{{ $article->image->url }}" alt="">
 						@endif	
-
 						</td>
 						<td class="px-6 py-4">{{ $article->alias }}</td>
 						<td class="px-6 py-4">{{ $article->topic_id }}</td>

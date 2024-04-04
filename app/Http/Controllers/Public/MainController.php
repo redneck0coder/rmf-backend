@@ -30,7 +30,7 @@ class MainController extends Controller
 			$topic = Topic::where('alias', $topicAlias)->first();
 			
 			$articles = Article::where('topic_id', $topic->id)->get();
-			$article = Article::with('image')->where('alias', $request->route('article_alias'))->get();
+			$article = Article::with('image')->where('alias', $request->route('article_alias'))->first();
 			return view('public.article', compact('topic', 'topics','article', 'articles'));
 		}
 }
