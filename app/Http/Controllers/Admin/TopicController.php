@@ -10,18 +10,13 @@ use App\Models\Image;
 
 class TopicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
 				$topics = Topic::with('image')->get();
         return view('admin.topic.index', compact('topics'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
 
@@ -29,9 +24,6 @@ class TopicController extends Controller
 			return view('admin.topic.create', compact('topics'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Store $request)
     {
 
@@ -49,47 +41,47 @@ class TopicController extends Controller
 			}
 
 			$topic->image()->save($image);
+
 			return redirect()->route('topics.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function edit(Topic $topic)
     {
 			$topics = Topic::all();
-			$topic = Topic::findOrFail($id);
-        return view('admin.topic.edit', compact('topic', 'topics'));
+      return view('admin.topic.edit', compact('topic', 'topics'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Update $request, string $id)
+    public function update(Update $request, Topic $topic)
     {
-			$topic = Topic::findOrFail($id);
-
 			$topic->update($request->validated());
+
+			if($request->hasFile('url')) {
+				$imageName = time().'.'.$request->url->getClientOriginalExtension();
+				$request->url->move(public_path('images'), $imageName); 
+				
+				if($topic->image) {
+					$image = Image::find($topic->image->id);
+					$image->url = $imageName;
+					$image->update(['url'=>$imageName]);
+				} else {
+					$image = new Image;
+					$image->url = $imageName;
+					$topic->image()->save($image);
+				}
+			}
 
 			return redirect()->route('topics.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Topic $topic)
     {
-        $topic = Topic::findOrFail($id);
-				$topic->delete();
-			
+				$topic->delete();			
 				return redirect()->route('topics.index');
     }
 }

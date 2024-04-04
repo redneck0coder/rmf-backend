@@ -10,6 +10,7 @@
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50">
 					<tr class="text-center">
 						<th class="px-6 py-3">id</th>
+						<th class="px-6 py-3">Картинка</th>
 						<th class="px-6 py-3">alias</th>
 						<th class="px-6 py-3">topic_id</th>
 						<th class="px-6 py-3">Наименование</th>
@@ -20,6 +21,12 @@
 					@foreach($articles as $article)
 					<tr class="odd:bg-white  even:bg-gray-50 text-center">
 						<td class="px-6 py-4">{{ $article->id }}</td>
+						<td class="px-6 py-4">
+						@if($article->image)
+							<img width="50" src="/images/{{ $article->image->url }}" alt="">
+						@endif	
+
+						</td>
 						<td class="px-6 py-4">{{ $article->alias }}</td>
 						<td class="px-6 py-4">{{ $article->topic_id }}</td>
 						<td class="px-6 py-4">{{ $article->title }}</td>

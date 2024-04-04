@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
 			$topics = Topic::all();
@@ -23,9 +21,6 @@ class ArticleController extends Controller
       return view('admin.article.index', compact('articles', 'topics'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
 			$topicsList = Topic::all()->pluck('name', 'id');
@@ -33,9 +28,6 @@ class ArticleController extends Controller
 			return view('admin.article.create', compact('topicsList', 'topics'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Store $request)
     {
 				$data = $request->validated();
@@ -57,44 +49,43 @@ class ArticleController extends Controller
 				return redirect()->route('articles.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
 				$topicsList = Topic::all()->pluck('name', 'id');
 				$topics = Topic::all();
-				$article = Article::findOrFail($id);
         return view('admin.article.edit', compact('article', 'topics', 'topicsList'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Update $request, string $id)
+    public function update(Update $request, Article $article)
     {		
-				$article = Article::findOrFail($id);
 				$article->update($request->validated());
+				
+				if($request->hasFile('url')) {
+					$imageName = time().'.'.$request->url->getClientOriginalExtension();
+					$request->url->move(public_path('images'), $imageName); 
+					
+					if($article->image) {
+						$image = Image::find($article->image->id);
+						$image->url = $imageName;
+						$image->update(['url'=>$imageName]);
+					} else {
+						$image = new Image;
+						$image->url = $imageName;
+						$article->image()->save($image);
+					}
+				}
 
 				return redirect()->route('articles.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
-				$article = Article::findOrfail($id);
 				$article->delete();
-
 				return redirect()->route('articles.index');
     }
 }
